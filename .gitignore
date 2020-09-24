@@ -33,6 +33,8 @@
 
 # Build
 build/
+cmake-build-debug/
 
 # IDE config
 .vscode/
+.idea/
