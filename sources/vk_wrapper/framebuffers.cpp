@@ -6,14 +6,14 @@
 
 using namespace vk_wrapper;
 
-void Framebuffers::setUp(VkDevice &device, vk_wrapper::SwapChain &swapChain,
-                         VkRenderPass &renderPass, VkImageView &depthImageView) {
+void Framebuffers::setUp(Devices &devices, SwapChain &swapChain, VkRenderPass &renderPass) {
+    m_depthImage.setUp(devices, swapChain.getExtent());
     m_swapChainFramebuffers.resize(swapChain.size());
 
     for (size_t i = 0; i < swapChain.size(); i++) {
         std::array<VkImageView, 2> attachments = {
                 swapChain.getImageView(i),
-                depthImageView
+                m_depthImage.get()
         };
 
         VkFramebufferCreateInfo framebufferInfo = {};
@@ -25,12 +25,13 @@ void Framebuffers::setUp(VkDevice &device, vk_wrapper::SwapChain &swapChain,
         framebufferInfo.height = swapChain.getExtent().height;
         framebufferInfo.layers = 1;
 
-        if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &m_swapChainFramebuffers[i]) != VK_SUCCESS)
+        if (vkCreateFramebuffer(devices.get(), &framebufferInfo, nullptr, &m_swapChainFramebuffers[i]) != VK_SUCCESS)
             throw std::runtime_error("failed to create framebuffer!");
     }
 }
 
 void Framebuffers::cleanUp(VkDevice &device) {
+    m_depthImage.cleanUp(device);
     for (auto &framebuffer : m_swapChainFramebuffers)
         vkDestroyFramebuffer(device, framebuffer, nullptr);
 }

@@ -46,7 +46,7 @@ namespace vk_wrapper {
 
         const ModelType m_type;
         const std::unordered_map<ModelType, std::string> m_modelFile = {
-                {ModelType::PAPER_PLANE, "paper_plane.obj"}
+                {ModelType::PAWN, "pawn.obj"}
         };
 
     };

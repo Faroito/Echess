@@ -12,19 +12,7 @@ Echess::Echess() : vk_wrapper::Application("Echess") {
 }
 
 void Echess::initModels() {
-
-//    const size_t planeNb = 30;
-//    glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
-//
-//    auto findBlock = [&position](std::unique_ptr<vk_wrapper::Model> &obj) { return obj->getPosition() == position; };
-//    for (size_t i = 0; i < planeNb; i++) {
-//        do {
-//            position = glm::vec3(rand() % 7 - 3, (rand() % 13 - 6) * 0.5, (rand() % 5) * 1.5);
-//        } while (std::find_if(std::begin(m_models), std::end(m_models), findBlock) != std::end(_models));
-//        m_models.push_back(std::make_unique<PaperPlane>(PaperPlane(vk_wrapper::COLORS_AVAILABLE[i % 7])));
-//        m_models.back()->setPosition(position);
-//    }
-
+    m_models.push_back(std::make_unique<Pawn>(Pawn(vk_wrapper::GREEN)));
     Application::initModels();
 }
 
@@ -36,13 +24,13 @@ void Echess::onDraw() {
     auto currentTime = std::chrono::high_resolution_clock::now();
     float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
 
-//    for (auto &model : m_models) {
-//        if (time > 0.02) {
-//            startTime = std::chrono::high_resolution_clock::now();
-//            model->update(m_models);
-//        }
-//        model->setCamera(m_camera, m_swapChain.ratio());
-//    }
+    for (auto &model : m_models) {
+        if (time > 0.02) {
+            startTime = std::chrono::high_resolution_clock::now();
+            model->update(m_models);
+        }
+        model->setCamera(m_camera, m_swapChain.ratio());
+    }
     Application::onDraw();
 }
 

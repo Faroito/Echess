@@ -25,7 +25,7 @@ namespace vk_wrapper {
     const int HEIGHT = 768;
     const int MAX_FRAMES_IN_FLIGHT = 2;
 
-    const std::string PATH = "../Resources/";
+    const std::string PATH = "../resources/";
     const VkClearColorValue BACKGROUND_COLOR = {0.07f, 0.17f, 0.24f, 1.0f};
 
     const std::vector<const char *> validationLayers = {
@@ -57,20 +57,14 @@ namespace vk_wrapper {
     };
 
     enum ModelType {
-        PAPER_PLANE
+        PAWN
     };
 
     enum ModelColor {
-        BLUE,
-        CYAN,
-        ORANGE,
-        RED,
-        GREEN,
-        PURPLE,
-        YELLOW
+        GREEN
     };
 
-    const ModelColor COLORS_AVAILABLE[] = {BLUE, CYAN, ORANGE, RED, GREEN, PURPLE, YELLOW};
+    const ModelColor COLORS_AVAILABLE[] = {GREEN};
 
     std::vector<char> readFile(const std::string &filename);
     VkFormat findDepthFormat(VkPhysicalDevice &device);

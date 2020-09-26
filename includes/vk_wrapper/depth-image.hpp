@@ -12,8 +12,6 @@
 
 namespace vk_wrapper {
 
-    // TODO: move to framebuffer ?
-
     /**
      * A depth attachment is based on an image.
      */
@@ -27,9 +25,9 @@ namespace vk_wrapper {
         VkImageView &get();
 
     private:
-        VkImage m_depthImage;
-        VkDeviceMemory m_depthImageMemory;
-        VkImageView m_depthImageView;
+        VkImage m_depthImage = nullptr;
+        VkDeviceMemory m_depthImageMemory = nullptr;
+        VkImageView m_depthImageView = nullptr;
     };
 
 }

@@ -38,13 +38,7 @@ namespace vk_wrapper {
 
         const ModelColor m_color;
         const std::unordered_map<ModelColor, std::string> m_textureFile = {
-                {ModelColor::BLUE,   "pp_blue_texture.png"},
-                {ModelColor::ORANGE, "pp_orange_texture.png"},
-                {ModelColor::PURPLE, "pp_purple_texture.png"},
-                {ModelColor::CYAN,   "pp_cyan_texture.png"},
-                {ModelColor::RED,    "pp_red_texture.png"},
-                {ModelColor::GREEN,  "pp_green_texture.png"},
-                {ModelColor::YELLOW, "pp_yellow_texture.png"}
+                {ModelColor::GREEN, "green.png"},
         };
     };
 

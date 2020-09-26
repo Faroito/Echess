@@ -14,7 +14,7 @@
 
 #include "application.hpp"
 #include "camera.hpp"
-//#include "plane.hpp"
+#include "pawn.hpp"
 
 namespace scene {
 

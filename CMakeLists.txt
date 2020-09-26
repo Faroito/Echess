@@ -28,6 +28,7 @@ include_directories(${PROJECT_SOURCE_DIR}/includes/scene/)
 add_executable(${PROJECT_NAME}
         sources/scene/camera.cpp
         sources/scene/echess.cpp
+        sources/scene/pawn.cpp
         sources/vk_wrapper/application.cpp
         sources/vk_wrapper/buffer-manip.cpp
         sources/vk_wrapper/command-buffers.cpp

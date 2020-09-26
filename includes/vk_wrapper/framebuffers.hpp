@@ -8,6 +8,7 @@
 #include <vector>
 #include <array>
 
+#include "depth-image.hpp"
 #include "libraries.hpp"
 #include "swap-chain.hpp"
 #include "utils.hpp"
@@ -23,13 +24,14 @@ namespace vk_wrapper {
     public:
         Framebuffers() = default;
 
-        void setUp(VkDevice &device, SwapChain &swapChain, VkRenderPass &renderPass, VkImageView &depthImageView);
+        void setUp(Devices &devices, SwapChain &swapChain, VkRenderPass &renderPass);
         void cleanUp(VkDevice &device);
 
         VkFramebuffer &operator[](size_t i);
         size_t size() const;
 
     private:
+        DepthImage m_depthImage;
         std::vector<VkFramebuffer> m_swapChainFramebuffers;
 
     };

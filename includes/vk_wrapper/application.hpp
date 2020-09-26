@@ -9,11 +9,8 @@
 
 #include "i-application.hpp"
 
-// TODO: check if all header are required
-#include "buffer-manip.hpp"
 #include "command-pool.hpp"
 #include "command-buffers.hpp"
-#include "depth-image.hpp"
 #include "devices.hpp"
 #include "framebuffers.hpp"
 #include "graphics-pipeline.hpp"
@@ -23,8 +20,6 @@
 #include "model.hpp"
 #include "swap-chain.hpp"
 #include "sync-objects.hpp"
-#include "utils.hpp"
-#include "vertex.hpp"
 #include "window.hpp"
 
 namespace vk_wrapper {
@@ -70,7 +65,6 @@ namespace vk_wrapper {
         GraphicsPipeline m_pipeline;
         CommandPool m_commandPool;
         CommandBuffers m_commandBuffers;
-        DepthImage m_depthImage;
         Framebuffers m_framebuffers;
         SyncObjects m_syncObjects;
 

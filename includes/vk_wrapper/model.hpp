@@ -46,10 +46,10 @@ namespace vk_wrapper {
         VkDescriptorSet &getDescriptorSet(size_t i);
 
     protected:
-        glm::vec3 _velocity = glm::vec3(0.0f, 0.0f, 0.0f);
-        glm::vec3 _position = glm::vec3(0.0f, 0.0f, 0.0f);
-        glm::vec3 _orientation = glm::vec3(0.0f, 0.0f, 0.0f);
-        glm::vec3 _offset = glm::vec3(0.0f, 0.5f, 0.0f);
+        glm::vec3 m_velocity = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 m_position = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 m_orientation = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 m_offset = glm::vec3(0.0f, 0.0f, 0.0f);
 
     private:
         const size_t m_id;
