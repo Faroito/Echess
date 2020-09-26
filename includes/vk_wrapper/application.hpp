@@ -8,25 +8,30 @@
 #include <unordered_map>
 
 #include "i-application.hpp"
+
 //#include "buffer-manip.hpp"
 //#include "command-pool.hpp"
 //#include "command-buffers.hpp"
 //#include "depth-image.hpp"
-//#include "devices.hpp"
+#include "devices.hpp"
 //#include "framebuffers.hpp"
 //#include "graphics-pipeline.hpp"
 #include "instance.hpp"
 #include "libraries.hpp"
 //#include "mesh.hpp"
 //#include "model.hpp"
-//#include "surface.hpp"
-//#include "swap-chain.hpp"
+#include "swap-chain.hpp"
 //#include "sync-objects.hpp"
 #include "utils.hpp"
 //#include "vertex.hpp"
 #include "window.hpp"
 
 namespace vk_wrapper {
+
+    /**
+     * Application class that inherit from IApplication.
+     * Makes call to all vulkans abstraction classes.
+     */
     class Application : public IApplication {
     public:
         explicit Application(const std::string &appName);
@@ -53,15 +58,14 @@ namespace vk_wrapper {
 
     protected:
         Window m_window;
-//        SwapChain m_swapChain;
+        SwapChain m_swapChain;
 //        Models_t m_models;
 
     private:
         const std::string m_appName;
 
         Instance m_instance;
-//        Surface m_surface;
-//        Devices m_devices;
+        Devices m_devices;
 //        GraphicsPipeline m_pipeline;
 //        CommandPool m_commandPool;
 //        CommandBuffers m_commandBuffers;

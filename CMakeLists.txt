@@ -29,8 +29,13 @@ add_executable(${PROJECT_NAME}
         sources/scene/camera.cpp
         sources/scene/echess.cpp
         sources/vk_wrapper/application.cpp
+        sources/vk_wrapper/buffer-manip.cpp
+        sources/vk_wrapper/devices.cpp
         sources/vk_wrapper/instance.cpp
+        sources/vk_wrapper/surface.cpp
+        sources/vk_wrapper/swap-chain.cpp
         sources/vk_wrapper/window.cpp
+        sources/vk_wrapper/utils.cpp
         sources/main.cpp)
 
 # Link Conan libraries

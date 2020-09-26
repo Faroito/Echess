@@ -17,9 +17,8 @@ Application::~Application() {
 
 void Application::initVulkan() {
     m_instance.setUp(m_appName);
-//    m_surface.setUp(m_instance.get(), m_window.get());
-//    m_devices.setUp(m_instance.get(), m_surface);
-//    m_swapChain.setUp(m_window.get(), m_surface, m_devices);
+    m_devices.setUp(m_instance.get(), m_window.get());
+    m_swapChain.setUp(m_window.get(), m_devices);
 //    m_pipeline.setUp(m_devices, m_swapChain);
 //    m_commandPool.setUp(m_devices.get(), m_surface.findQueueFamilies(m_devices.getPhysical()));
 //    m_depthImage.setUp(m_devices, m_swapChain.getExtent());
@@ -70,8 +69,7 @@ void Application::cleanup() {
 //        texture.second.cleanUp(m_devices.get());
 //    m_syncObjects.cleanUp(m_devices.get());
 //    m_commandPool.cleanUp(m_devices.get());
-//    m_devices.cleanUp();
-//    m_surface.cleanUp(m_instance.get());
+    m_devices.cleanUp(m_instance.get());
     m_instance.cleanUp();
     m_window.cleanUp();
 }
@@ -83,7 +81,7 @@ void Application::cleanupSwapChain() {
 //    for (auto &model : m_models)
 //        model->cleanUp(m_devices.get());
 //    m_pipeline.cleanUp(m_devices.get());
-//    m_swapChain.cleanUp(m_devices.get());
+    m_swapChain.cleanUp(m_devices.get());
 }
 
 void Application::recreateSwapChain() {
@@ -92,7 +90,7 @@ void Application::recreateSwapChain() {
 
     cleanupSwapChain();
 
-//    m_swapChain.setUp(m_window.get(), m_surface, m_devices);
+    m_swapChain.setUp(m_window.get(), m_devices);
 //    m_pipeline.setUp(m_devices, m_swapChain);
 //    m_depthImage.setUp(m_devices, m_swapChain.getExtent());
 //    m_framebuffers.setUp(m_devices.get(), m_swapChain, m_pipeline.getRenderPass(), m_depthImage.get());

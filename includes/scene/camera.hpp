@@ -11,6 +11,9 @@
 
 namespace scene {
 
+    /**
+     * Camera handler class which used in Echess.
+     */
     class Camera {
     public:
         Camera();

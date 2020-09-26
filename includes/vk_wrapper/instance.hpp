@@ -11,12 +11,6 @@
 #include "libraries.hpp"
 #include "utils.hpp"
 
-#ifdef NDEBUG
-const bool enableValidationLayers = false;
-#else
-const bool enableValidationLayers = true;
-#endif
-
 namespace vk_wrapper {
 
     /**
@@ -53,7 +47,7 @@ namespace vk_wrapper {
                 void *pUserData);
 
     private:
-        VkInstance m_instance;
+        VkInstance m_instance = nullptr;
         VkDebugUtilsMessengerEXT m_debugMessenger;
 
     };

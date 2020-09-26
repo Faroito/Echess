@@ -8,6 +8,10 @@
 #include "libraries.hpp"
 
 namespace vk_wrapper {
+
+    /**
+     * Interface for Application help to handle keys and other events.
+     */
     class IApplication {
     public:
         virtual void onMouseMove(double x, double y) = 0;

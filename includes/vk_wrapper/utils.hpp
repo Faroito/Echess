@@ -14,6 +14,12 @@
 
 #include "libraries.hpp"
 
+#ifdef NDEBUG
+const bool enableValidationLayers = false;
+#else
+const bool enableValidationLayers = true;
+#endif
+
 namespace vk_wrapper {
     const int WIDTH = 1024;
     const int HEIGHT = 768;
@@ -68,8 +74,6 @@ namespace vk_wrapper {
 
     std::vector<char> readFile(const std::string &filename);
     VkFormat findDepthFormat(VkPhysicalDevice &device);
-    VkFormat findSupportedFormat(VkPhysicalDevice &device, const std::vector<VkFormat> &candidates,
-                                 VkImageTiling tiling, VkFormatFeatureFlags features);
     uint32_t findMemoryType(VkPhysicalDevice &device, uint32_t typeFilter, VkMemoryPropertyFlags properties);
 }
 

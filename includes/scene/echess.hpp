@@ -17,6 +17,11 @@
 //#include "plane.hpp"
 
 namespace scene {
+
+    /**
+     * Scene handler class that inherit from Application.
+     * Handle scene models and events.
+     */
     class Echess : public vk_wrapper::Application {
     public:
         Echess();
