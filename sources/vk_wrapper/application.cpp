@@ -19,11 +19,11 @@ void Application::initVulkan() {
     m_instance.setUp(m_appName);
     m_devices.setUp(m_instance.get(), m_window.get());
     m_swapChain.setUp(m_window.get(), m_devices);
-//    m_pipeline.setUp(m_devices, m_swapChain);
-//    m_commandPool.setUp(m_devices.get(), m_surface.findQueueFamilies(m_devices.getPhysical()));
-//    m_depthImage.setUp(m_devices, m_swapChain.getExtent());
+    m_pipeline.setUp(m_devices, m_swapChain);
+    m_commandPool.setUp(m_devices.get(), m_devices.getQueueFamilies());
+    m_depthImage.setUp(m_devices, m_swapChain.getExtent());
 //    m_framebuffers.setUp(m_devices.get(), m_swapChain, m_pipeline.getRenderPass(), m_depthImage.get());
-//    m_syncObjects.setUp(m_devices.get(), m_swapChain.size());
+    m_syncObjects.setUp(m_devices.get(), m_swapChain.size());
 }
 
 void Application::initModels() {
@@ -67,20 +67,20 @@ void Application::cleanup() {
 //        mesh.second.cleanUp(m_devices.get());
 //    for (auto &texture : m_textures)
 //        texture.second.cleanUp(m_devices.get());
-//    m_syncObjects.cleanUp(m_devices.get());
-//    m_commandPool.cleanUp(m_devices.get());
+    m_syncObjects.cleanUp(m_devices.get());
+    m_commandPool.cleanUp(m_devices.get());
     m_devices.cleanUp(m_instance.get());
     m_instance.cleanUp();
     m_window.cleanUp();
 }
 
 void Application::cleanupSwapChain() {
-//    m_depthImage.cleanUp(m_devices.get());
+    m_depthImage.cleanUp(m_devices.get());
 //    m_framebuffers.cleanUp(m_devices.get());
 //    m_commandBuffers.cleanUp(m_devices.get(), m_commandPool.get());
 //    for (auto &model : m_models)
 //        model->cleanUp(m_devices.get());
-//    m_pipeline.cleanUp(m_devices.get());
+    m_pipeline.cleanUp(m_devices.get());
     m_swapChain.cleanUp(m_devices.get());
 }
 
@@ -91,8 +91,8 @@ void Application::recreateSwapChain() {
     cleanupSwapChain();
 
     m_swapChain.setUp(m_window.get(), m_devices);
-//    m_pipeline.setUp(m_devices, m_swapChain);
-//    m_depthImage.setUp(m_devices, m_swapChain.getExtent());
+    m_pipeline.setUp(m_devices, m_swapChain);
+    m_depthImage.setUp(m_devices, m_swapChain.getExtent());
 //    m_framebuffers.setUp(m_devices.get(), m_swapChain, m_pipeline.getRenderPass(), m_depthImage.get());
 //    for (auto &model : m_models)
 //        model->setUp(m_devices, m_swapChain, m_pipeline, m_framebuffers, m_commandPool.get(), m_textures);

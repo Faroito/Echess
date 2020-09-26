@@ -101,3 +101,7 @@ VkQueue &Devices::getGraphicsQueue() {
 VkQueue &Devices::getPresentQueue() {
     return m_presentQueue;
 }
+
+QueueFamilyIndices Devices::getQueueFamilies() {
+    return m_surface.findQueueFamilies(m_physicalDevice);
+}

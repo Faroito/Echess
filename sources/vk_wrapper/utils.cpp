@@ -5,7 +5,7 @@
 #include "utils.hpp"
 
 std::vector<char> vk_wrapper::readFile(const std::string &filename) {
-    std::ifstream file("../CompiledShaders/" + filename, std::ios::ate | std::ios::binary);
+    std::ifstream file("../" + filename, std::ios::ate | std::ios::binary);
 
     if (!file.is_open())
         throw std::runtime_error("Failed to open file!");

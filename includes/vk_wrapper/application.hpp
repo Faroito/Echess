@@ -9,21 +9,22 @@
 
 #include "i-application.hpp"
 
-//#include "buffer-manip.hpp"
-//#include "command-pool.hpp"
-//#include "command-buffers.hpp"
-//#include "depth-image.hpp"
+// TODO: check if all header are required
+#include "buffer-manip.hpp"
+#include "command-pool.hpp"
+#include "command-buffers.hpp"
+#include "depth-image.hpp"
 #include "devices.hpp"
-//#include "framebuffers.hpp"
-//#include "graphics-pipeline.hpp"
+#include "framebuffers.hpp"
+#include "graphics-pipeline.hpp"
 #include "instance.hpp"
 #include "libraries.hpp"
-//#include "mesh.hpp"
-//#include "model.hpp"
+#include "mesh.hpp"
+#include "model.hpp"
 #include "swap-chain.hpp"
-//#include "sync-objects.hpp"
+#include "sync-objects.hpp"
 #include "utils.hpp"
-//#include "vertex.hpp"
+#include "vertex.hpp"
 #include "window.hpp"
 
 namespace vk_wrapper {
@@ -59,22 +60,22 @@ namespace vk_wrapper {
     protected:
         Window m_window;
         SwapChain m_swapChain;
-//        Models_t m_models;
+        Models_t m_models;
 
     private:
         const std::string m_appName;
 
         Instance m_instance;
         Devices m_devices;
-//        GraphicsPipeline m_pipeline;
-//        CommandPool m_commandPool;
-//        CommandBuffers m_commandBuffers;
-//        DepthImage m_depthImage;
-//        Framebuffers m_framebuffers;
-//        SyncObjects m_syncObjects;
-//
-//        MeshMap_t m_meshes;
-//        TextureMap_t m_textures;
+        GraphicsPipeline m_pipeline;
+        CommandPool m_commandPool;
+        CommandBuffers m_commandBuffers;
+        DepthImage m_depthImage;
+        Framebuffers m_framebuffers;
+        SyncObjects m_syncObjects;
+
+        MeshMap_t m_meshes;
+        TextureMap_t m_textures;
     };
 };
 

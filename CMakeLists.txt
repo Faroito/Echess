@@ -30,10 +30,21 @@ add_executable(${PROJECT_NAME}
         sources/scene/echess.cpp
         sources/vk_wrapper/application.cpp
         sources/vk_wrapper/buffer-manip.cpp
+        sources/vk_wrapper/command-buffers.cpp
+        sources/vk_wrapper/command-pool.cpp
+        sources/vk_wrapper/depth-image.cpp
+        sources/vk_wrapper/descriptor-sets.cpp
         sources/vk_wrapper/devices.cpp
+        sources/vk_wrapper/framebuffers.cpp
+        sources/vk_wrapper/graphics-pipeline.cpp
         sources/vk_wrapper/instance.cpp
+        sources/vk_wrapper/mesh.cpp
+        sources/vk_wrapper/model.cpp
         sources/vk_wrapper/surface.cpp
         sources/vk_wrapper/swap-chain.cpp
+        sources/vk_wrapper/sync-objects.cpp
+        sources/vk_wrapper/texture.cpp
+        sources/vk_wrapper/uniform-buffers.cpp
         sources/vk_wrapper/window.cpp
         sources/vk_wrapper/utils.cpp
         sources/main.cpp)
@@ -53,7 +64,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Compile shaders with a bash script
 execute_process(COMMAND bash
-        ${PROJECT_SOURCE_DIR}/compile_shader.sh ${PROJECT_SOURCE_DIR})
+        ${PROJECT_SOURCE_DIR}/compile_shader.sh ${PROJECT_SOURCE_DIR} ${CMAKE_BINARY_DIR})
 
 # Config rpath for conan dynamic libraries
 if (SYS_MACOSX)

@@ -31,6 +31,7 @@ namespace vk_wrapper {
         Surface &getSurface();
         VkQueue &getGraphicsQueue();
         VkQueue &getPresentQueue();
+        QueueFamilyIndices getQueueFamilies();
 
     private:
         void pickPhysicalDevice(VkInstance &instance);
