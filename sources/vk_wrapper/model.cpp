@@ -8,16 +8,14 @@ using namespace vk_wrapper;
 
 size_t Model::m_idGen = 0;
 
-Model::Model(const vk_wrapper::ModelType type, const vk_wrapper::ModelColor color)
+Model::Model(const ModelType type, const ModelColor color)
         : m_type(type), m_color(color), m_id(m_idGen++) {}
 
-void
-Model::setUp(vk_wrapper::Devices &devices, vk_wrapper::SwapChain &swapChain,
-             vk_wrapper::GraphicsPipeline &pipeline,
-             vk_wrapper::Framebuffers &framebuffers, VkCommandPool &pool, TextureMap_t &textures) {
-    m_uniforms.setUp(devices, swapChain.size());
-    m_descriptorSets.setUp(devices.get(), swapChain, pipeline.getDescriptorSetLayout(), textures.at(m_color),
-                           m_uniforms);
+void Model::setUp(Devices &devices, GraphicsPipeline &pipeline, Framebuffers &framebuffers,
+                  VkCommandPool &pool, TextureMap_t &textures, size_t size) {
+    m_uniforms.setUp(devices, size);
+    m_descriptorSets.setUp(devices.get(), pipeline.getDescriptorSetLayout(),
+                           textures.at(m_color), m_uniforms, size);
 }
 
 void Model::cleanUp(VkDevice &device) {
@@ -33,9 +31,9 @@ void Model::setOrientation(glm::vec3 orientation) {
     m_orientation = orientation;
 }
 
-void Model::setCamera(scene::Camera_ptr_t &_camera, float ratio) {
-    m_ubo.view = _camera->getViewMatrix();
-    m_ubo.proj = _camera->getProjectionMatrix(ratio);
+void Model::setCamera(scene::Camera_ptr_t &camera, float ratio) {
+    m_ubo.view = camera->getViewMatrix();
+    m_ubo.proj = camera->getProjectionMatrix(ratio);
 }
 
 void Model::update(std::vector<std::unique_ptr<Model>> &models) {}

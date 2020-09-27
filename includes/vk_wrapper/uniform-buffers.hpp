@@ -15,8 +15,16 @@
 
 namespace vk_wrapper {
 
+    struct UniformBufferObject {
+        glm::mat4 model;
+        glm::mat4 view;
+        glm::mat4 proj;
+    };
+
     /**
      * Uniform buffer objects (UBO).
+     *
+     * Contains all transformations done on a model (view, proj & model)
      */
     class UniformBuffers {
     public:

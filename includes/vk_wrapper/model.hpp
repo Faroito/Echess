@@ -28,13 +28,13 @@ namespace vk_wrapper {
         explicit Model(ModelType type, ModelColor color);
         virtual ~Model() = default;
 
-        void setUp(Devices &devices, SwapChain &swapChain, GraphicsPipeline &pipeline,
-                   Framebuffers &framebuffers, VkCommandPool &pool, TextureMap_t &textures);
+        void setUp(Devices &devices, GraphicsPipeline &pipeline, Framebuffers &framebuffers,
+                   VkCommandPool &pool, TextureMap_t &textures, size_t size);
         void cleanUp(VkDevice &device);
 
         void setPosition(glm::vec3 position);
         void setOrientation(glm::vec3 orientation);
-        void setCamera(scene::Camera_ptr_t &_camera, float ratio);
+        void setCamera(scene::Camera_ptr_t &camera, float ratio);
 
         virtual void update(std::vector<std::unique_ptr<Model>> &models);
         virtual void updateUniformBuffer(VkDevice &device, uint32_t currentImage);

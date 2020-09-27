@@ -6,13 +6,13 @@
 
 using namespace vk_wrapper;
 
-void CommandPool::setUp(VkDevice &device, vk_wrapper::QueueFamilyIndices queueFamilyIndices) {
+void CommandPool::setUp(Devices &devices) {
     VkCommandPoolCreateInfo poolInfo = {};
     poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-    poolInfo.queueFamilyIndex = queueFamilyIndices.graphicsFamily.value();
+    poolInfo.queueFamilyIndex = devices.getQueueFamilies().graphicsFamily.value();
     poolInfo.flags = 0;
 
-    if (vkCreateCommandPool(device, &poolInfo, nullptr, &m_commandPool) != VK_SUCCESS)
+    if (vkCreateCommandPool(devices.get(), &poolInfo, nullptr, &m_commandPool) != VK_SUCCESS)
         throw std::runtime_error("failed to create command pool!");
 }
 

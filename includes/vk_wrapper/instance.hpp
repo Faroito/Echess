@@ -48,7 +48,7 @@ namespace vk_wrapper {
 
     private:
         VkInstance m_instance = nullptr;
-        VkDebugUtilsMessengerEXT m_debugMessenger;
+        VkDebugUtilsMessengerEXT m_debugMessenger = nullptr;
 
     };
 

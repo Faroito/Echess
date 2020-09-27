@@ -35,12 +35,6 @@ namespace vk_wrapper {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME
     };
 
-    struct UniformBufferObject {
-        glm::mat4 model;
-        glm::mat4 view;
-        glm::mat4 proj;
-    };
-
     struct QueueFamilyIndices {
         std::optional<uint32_t> graphicsFamily;
         std::optional<uint32_t> presentFamily;
@@ -65,6 +59,7 @@ namespace vk_wrapper {
     };
 
     const ModelColor COLORS_AVAILABLE[] = {GREEN};
+    const ModelType TYPE_AVAILABLE[] = {PAWN};
 
     std::vector<char> readFile(const std::string &filename);
     VkFormat findDepthFormat(VkPhysicalDevice &device);

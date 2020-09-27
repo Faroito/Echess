@@ -20,15 +20,13 @@ void Application::initVulkan() {
     m_devices.setUp(m_instance.get(), m_window.get());
     m_swapChain.setUp(m_window.get(), m_devices);
     m_pipeline.setUp(m_devices, m_swapChain);
-    m_commandPool.setUp(m_devices.get(), m_devices.getQueueFamilies());
+    m_commandPool.setUp(m_devices);
     m_framebuffers.setUp(m_devices, m_swapChain, m_pipeline.getRenderPass());
     m_syncObjects.setUp(m_devices.get(), m_swapChain.size());
 }
 
 void Application::initModels() {
-    const ModelType allType[] = {PAWN};
-
-    for (const auto &type : allType) {
+    for (const auto &type : TYPE_AVAILABLE) {
         m_meshes.emplace(type, Mesh(type));
         m_meshes.at(type).setUp(m_devices, m_commandPool.get());
     }
@@ -38,9 +36,10 @@ void Application::initModels() {
     }
 
     for (auto &model : m_models)
-        model->setUp(m_devices, m_swapChain, m_pipeline, m_framebuffers, m_commandPool.get(), m_textures);
-    m_commandBuffers.setUp(m_devices.get(), m_swapChain, m_pipeline, m_framebuffers, m_commandPool.get(), m_meshes,
-                           m_models);
+        model->setUp(m_devices, m_pipeline, m_framebuffers, m_commandPool.get(),
+                     m_textures, m_swapChain.size());
+    m_commandBuffers.setUp(m_devices.get(), m_swapChain, m_pipeline, m_framebuffers,
+                           m_commandPool.get(), m_meshes, m_models);
 }
 
 void Application::run() {
@@ -53,7 +52,8 @@ void Application::run() {
 }
 
 void Application::onDraw() {
-    if (m_syncObjects.drawFrame(m_devices, m_swapChain, m_models, m_commandBuffers, m_window.resized)) {
+    if (m_syncObjects.drawFrame(m_devices, m_swapChain, m_models,
+                                m_commandBuffers, m_window.resized)) {
         m_window.resized = false;
         recreateSwapChain();
     }
@@ -92,9 +92,10 @@ void Application::recreateSwapChain() {
     m_pipeline.setUp(m_devices, m_swapChain);
     m_framebuffers.setUp(m_devices, m_swapChain, m_pipeline.getRenderPass());
     for (auto &model : m_models)
-        model->setUp(m_devices, m_swapChain, m_pipeline, m_framebuffers, m_commandPool.get(), m_textures);
-    m_commandBuffers.setUp(m_devices.get(), m_swapChain, m_pipeline, m_framebuffers, m_commandPool.get(), m_meshes,
-                           m_models);
+        model->setUp(m_devices, m_pipeline, m_framebuffers,
+                     m_commandPool.get(), m_textures, m_swapChain.size());
+    m_commandBuffers.setUp(m_devices.get(), m_swapChain, m_pipeline, m_framebuffers,
+                           m_commandPool.get(), m_meshes, m_models);
 }
 
 void Application::onMouseMove(double x, double y) {}

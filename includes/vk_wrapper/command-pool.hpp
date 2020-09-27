@@ -5,6 +5,7 @@
 #ifndef COMMAND_POOL_HPP
 # define COMMAND_POOL_HPP
 
+#include "devices.hpp"
 #include "libraries.hpp"
 #include "utils.hpp"
 
@@ -18,7 +19,7 @@ namespace vk_wrapper {
     public:
         CommandPool() = default;
 
-        void setUp(VkDevice &device, QueueFamilyIndices queueFamilyIndices);
+        void setUp(Devices &devices);
         void cleanUp(VkDevice &device);
 
         VkCommandPool &get();

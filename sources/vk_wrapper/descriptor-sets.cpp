@@ -6,10 +6,10 @@
 
 using namespace vk_wrapper;
 
-void DescriptorSets::setUp(VkDevice &device, SwapChain &swapChain, VkDescriptorSetLayout &layout,
-                           vk_wrapper::Texture &texture, vk_wrapper::UniformBuffers &uniforms) {
-    createDescriptorPool(device, swapChain.size());
-    createDescriptorSets(device, swapChain.size(), layout, texture, uniforms);
+void DescriptorSets::setUp(VkDevice &device, VkDescriptorSetLayout &layout, Texture &texture,
+                           UniformBuffers &uniforms, size_t size) {
+    createDescriptorPool(device, size);
+    createDescriptorSets(device, layout, texture, uniforms, size);
 }
 
 void DescriptorSets::createDescriptorPool(VkDevice &device, size_t size) {
@@ -29,9 +29,8 @@ void DescriptorSets::createDescriptorPool(VkDevice &device, size_t size) {
         throw std::runtime_error("failed to create descriptor pool!");
 }
 
-void DescriptorSets::createDescriptorSets(VkDevice &device, size_t size, VkDescriptorSetLayout &layout,
-                                          vk_wrapper::Texture &texture,
-                                          vk_wrapper::UniformBuffers &uniforms) {
+void DescriptorSets::createDescriptorSets(VkDevice &device, VkDescriptorSetLayout &layout, vk_wrapper::Texture &texture,
+                                          vk_wrapper::UniformBuffers &uniforms, size_t size) {
     std::vector<VkDescriptorSetLayout> layouts(size, layout);
     VkDescriptorSetAllocateInfo allocInfo = {};
     allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
