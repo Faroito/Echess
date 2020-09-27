@@ -30,14 +30,10 @@ void Application::initModels() {
         m_meshes.emplace(type, Mesh(type));
         m_meshes.at(type).setUp(m_devices, m_commandPool.get());
     }
-    for (const auto &color : COLORS_AVAILABLE) {
-        m_textures.emplace(color, Texture(color));
-        m_textures.at(color).setUp(m_devices, m_commandPool.get());
-    }
 
     for (auto &model : m_models)
         model->setUp(m_devices, m_pipeline, m_framebuffers, m_commandPool.get(),
-                     m_textures, m_swapChain.size());
+                     m_meshes, m_swapChain.size());
     m_commandBuffers.setUp(m_devices.get(), m_swapChain, m_pipeline, m_framebuffers,
                            m_commandPool.get(), m_meshes, m_models);
 }
@@ -64,8 +60,6 @@ void Application::cleanup() {
 
     for (auto &mesh : m_meshes)
         mesh.second.cleanUp(m_devices.get());
-    for (auto &texture : m_textures)
-        texture.second.cleanUp(m_devices.get());
     m_syncObjects.cleanUp(m_devices.get());
     m_commandPool.cleanUp(m_devices.get());
     m_devices.cleanUp(m_instance.get());
@@ -92,8 +86,8 @@ void Application::recreateSwapChain() {
     m_pipeline.setUp(m_devices, m_swapChain);
     m_framebuffers.setUp(m_devices, m_swapChain, m_pipeline.getRenderPass());
     for (auto &model : m_models)
-        model->setUp(m_devices, m_pipeline, m_framebuffers,
-                     m_commandPool.get(), m_textures, m_swapChain.size());
+        model->setUp(m_devices, m_pipeline, m_framebuffers, m_commandPool.get(),
+                     m_meshes, m_swapChain.size());
     m_commandBuffers.setUp(m_devices.get(), m_swapChain, m_pipeline, m_framebuffers,
                            m_commandPool.get(), m_meshes, m_models);
 }

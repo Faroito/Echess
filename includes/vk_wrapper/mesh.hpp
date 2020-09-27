@@ -11,6 +11,7 @@
 #include "buffer-manip.hpp"
 #include "devices.hpp"
 #include "libraries.hpp"
+#include "texture.hpp"
 #include "utils.hpp"
 #include "vertex.hpp"
 
@@ -29,11 +30,13 @@ namespace vk_wrapper {
         VkBuffer &getVertexBuffer();
         VkBuffer &getIndexBuffer();
         uint32_t getIndicesSize() const;
+        Texture &getTexture(ModelColor color);
 
     private:
         void loadModel();
         void createVertexBuffer(Devices &devices, VkCommandPool &pool);
         void createIndexBuffer(Devices &devices, VkCommandPool &pool);
+        void loadTextures(Devices &devices, VkCommandPool &pool);
 
     private:
         std::vector<Vertex> m_vertices;
@@ -45,10 +48,10 @@ namespace vk_wrapper {
         VkDeviceMemory m_indexBufferMemory = nullptr;
 
         const ModelType m_type;
-        const std::unordered_map<ModelType, std::string> m_modelFile = {
-                {ModelType::PAWN, "pawn.obj"}
-        };
+        TextureMap_t m_textures;
 
+        const std::vector<std::string> m_modelTypeName = {"pawn"};
+        const std::vector<std::string> m_modelColorName = {"white", "black"};
     };
 
     typedef std::unordered_map<ModelType, Mesh> MeshMap_t;

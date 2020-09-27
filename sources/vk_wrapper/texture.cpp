@@ -8,10 +8,10 @@
 
 using namespace vk_wrapper;
 
-Texture::Texture(const vk_wrapper::ModelColor color) : m_color(color) {}
+Texture::Texture(const std::string &fileName) : m_fileName(fileName) {}
 
-void Texture::setUp(vk_wrapper::Devices &devices, VkCommandPool &pool) {
-    createTextureImage(devices, pool, PATH + m_textureFile.at(m_color));
+void Texture::setUp(Devices &devices, VkCommandPool &pool) {
+    createTextureImage(devices, pool, PATH + m_fileName + ".jpg");
     createTextureImageView(devices.get());
     createTextureSampler(devices.get());
 }

@@ -14,6 +14,7 @@
 #include "graphics-pipeline.hpp"
 #include "descriptor-sets.hpp"
 #include "devices.hpp"
+#include "mesh.hpp"
 #include "libraries.hpp"
 #include "texture.hpp"
 #include "uniform-buffers.hpp"
@@ -29,7 +30,7 @@ namespace vk_wrapper {
         virtual ~Model() = default;
 
         void setUp(Devices &devices, GraphicsPipeline &pipeline, Framebuffers &framebuffers,
-                   VkCommandPool &pool, TextureMap_t &textures, size_t size);
+                   VkCommandPool &pool, MeshMap_t &meshes, size_t size);
         void cleanUp(VkDevice &device);
 
         void setPosition(glm::vec3 position);

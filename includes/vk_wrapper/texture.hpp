@@ -17,7 +17,7 @@ namespace vk_wrapper {
 
     class Texture {
     public:
-        explicit Texture(ModelColor color);
+        explicit Texture(const std::string &fileName);
 
         void setUp(Devices &devices, VkCommandPool &pool);
         void cleanUp(VkDevice &device);
@@ -36,10 +36,7 @@ namespace vk_wrapper {
         VkImageView m_textureImageView = nullptr;
         VkSampler m_textureSampler = nullptr;
 
-        const ModelColor m_color;
-        const std::unordered_map<ModelColor, std::string> m_textureFile = {
-                {ModelColor::GREEN, "green.png"},
-        };
+        const std::string m_fileName;
     };
 
     typedef std::unordered_map<ModelColor, Texture> TextureMap_t;

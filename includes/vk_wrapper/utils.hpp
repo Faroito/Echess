@@ -51,15 +51,16 @@ namespace vk_wrapper {
     };
 
     enum ModelType {
-        PAWN
+        PAWN = 0
     };
 
     enum ModelColor {
-        GREEN
+        WHITE = 0,
+        BLACK
     };
 
-    const ModelColor COLORS_AVAILABLE[] = {GREEN};
     const ModelType TYPE_AVAILABLE[] = {PAWN};
+    const ModelColor COLORS_AVAILABLE[] = {WHITE};
 
     std::vector<char> readFile(const std::string &filename);
     VkFormat findDepthFormat(VkPhysicalDevice &device);

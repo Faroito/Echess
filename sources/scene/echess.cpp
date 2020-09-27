@@ -12,7 +12,7 @@ Echess::Echess() : vk_wrapper::Application("Echess") {
 }
 
 void Echess::initModels() {
-    m_models.push_back(std::make_unique<Pawn>(Pawn(vk_wrapper::GREEN)));
+    m_models.push_back(std::make_unique<Pawn>(Pawn(vk_wrapper::WHITE)));
     Application::initModels();
 }
 

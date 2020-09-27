@@ -26,7 +26,7 @@ namespace vk_wrapper {
 
     /**
      * Application class that inherit from IApplication.
-     * Makes call to all vulkans abstraction classes.
+     * Makes call to vulkans abstraction classes.
      */
     class Application : public IApplication {
     public:
@@ -55,6 +55,7 @@ namespace vk_wrapper {
     protected:
         Window m_window;
         SwapChain m_swapChain;
+
         Models_t m_models;
 
     private:
@@ -69,7 +70,6 @@ namespace vk_wrapper {
         SyncObjects m_syncObjects;
 
         MeshMap_t m_meshes;
-        TextureMap_t m_textures;
     };
 };
 

@@ -14,15 +14,15 @@ void Mesh::setUp(vk_wrapper::Devices &devices, VkCommandPool &pool) {
     loadModel();
     createVertexBuffer(devices, pool);
     createIndexBuffer(devices, pool);
+    loadTextures(devices, pool);
 }
-
 
 void Mesh::loadModel() {
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
     std::string err;
-    std::string path = PATH + m_modelFile.at(m_type);
+    std::string path = PATH + m_modelTypeName[m_type] + ".obj";
 
     if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, path.c_str()))
         throw std::runtime_error(err);
@@ -100,7 +100,17 @@ void Mesh::createIndexBuffer(vk_wrapper::Devices &devices, VkCommandPool &pool) 
     vkFreeMemory(devices.get(), stagingBufferMemory, nullptr);
 }
 
+void Mesh::loadTextures(Devices &devices, VkCommandPool &pool) {
+    for (const auto &color : COLORS_AVAILABLE) {
+        const std::string path = m_modelTypeName[m_type] + "_" + m_modelColorName[color];
+        m_textures.emplace(color, Texture(path));
+        m_textures.at(color).setUp(devices, pool);
+    }
+}
+
 void Mesh::cleanUp(VkDevice &device) {
+    for (auto &texture : m_textures)
+        texture.second.cleanUp(device);
     vkDestroyBuffer(device, m_vertexBuffer, nullptr);
     vkFreeMemory(device, m_vertexBufferMemory, nullptr);
     vkDestroyBuffer(device, m_indexBuffer, nullptr);
@@ -117,4 +127,8 @@ VkBuffer &Mesh::getIndexBuffer() {
 
 uint32_t Mesh::getIndicesSize() const {
     return m_indices.size();
+}
+
+Texture &Mesh::getTexture(ModelColor color) {
+    return m_textures.at(color);
 }

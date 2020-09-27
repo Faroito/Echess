@@ -12,10 +12,10 @@ Model::Model(const ModelType type, const ModelColor color)
         : m_type(type), m_color(color), m_id(m_idGen++) {}
 
 void Model::setUp(Devices &devices, GraphicsPipeline &pipeline, Framebuffers &framebuffers,
-                  VkCommandPool &pool, TextureMap_t &textures, size_t size) {
+                  VkCommandPool &pool, MeshMap_t &meshes, size_t size) {
     m_uniforms.setUp(devices, size);
     m_descriptorSets.setUp(devices.get(), pipeline.getDescriptorSetLayout(),
-                           textures.at(m_color), m_uniforms, size);
+                           meshes.at(m_type).getTexture(m_color), m_uniforms, size);
 }
 
 void Model::cleanUp(VkDevice &device) {
